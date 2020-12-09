@@ -6,6 +6,13 @@
         <router-link to="/333">NNN</router-link>
         <button @click="MM">登录</button>
         <button @click="NN">注销</button>
+        <div>
+            <a href="#"><input type="radio" name="a" id="1" class="w-25">左</a>
+            <a href="#"><input type="radio" name="a" id="2" class="w-25">中</a>
+            <a href="#"><input type="radio" name="a" id="3" class="w-25">右</a>
+        </div>
+        
+        
     </div>
 </template>
 

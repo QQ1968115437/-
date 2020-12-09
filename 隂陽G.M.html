@@ -259,51 +259,52 @@ git仓库=[本地操作空间，暂存区(内存)，本地仓库]-->网络仓库
     <video src="视频文件 URL 地址" width="宽度" height="高度"> 浏览器不支持视频的提示文本 </video>
     <video width="宽度" height="高度"> <source src="视频文件 URL 地址" type="video/webm"/> ... 浏览器不支持视频的提示文本 </video>
     视频属性 
-    controls，布尔属性，用于控制是否显示视频播放控件 
-    autoplay，布尔属性，用于控制是否自动播放视频(需与 muted 属性组合使用) 
-    muted，布尔属性，用于控制视频是否静音播放 
-    loop，布尔属性，用于控制视频是否循环播放 
-    poster,海报帧的 URL ·preload,控制视频的预载入方式 :
+    controls,布尔属性，用于控制是否显示视频播放控件 
+    autoplay,布尔属性，用于控制是否自动播放视频(需与 muted 属性组合使用) 
+    muted,布尔属性，用于控制视频是否静音播放 
+    loop,布尔属性，用于控制视频是否循环播放 
+    poster,海报帧的 URL 
+    preload,控制视频的预载入方式 :
         auto,浏览器尽可能的下载视频文件(播放流畅，但会造成网络流量的浪费) 
-        none，不缓存视频，尽可能的减少流量的浪费 
+        none,不缓存视频，尽可能的减少流量的浪费 
         metadata,只加载视频的时长、宽度、高度等信
 
     音频格式 mp3、wav、ogg
     <audio src="音频文件 URL"> 浏览器不支持音频的提示文本 </audio>
     <audio> <source src="音频文件 URL" type="audio/ogg"/> ... 浏览器不支持音频的提示文本 </audio>
     音频属性
-    controls，布尔属性，用于控制是否显示音频播放控件 
-    autoplay，布尔属性，用于控制是否自动播放音频(需与 muted 属性组合使用) 
-    muted，布尔属性，用于控制音频是否静音播放 
-    loop，布尔属性，用于控制音频是否循环播放 
+    controls,布尔属性，用于控制是否显示音频播放控件 
+    autoplay,布尔属性，用于控制是否自动播放音频(需与 muted 属性组合使用) 
+    muted,布尔属性，用于控制音频是否静音播放 
+    loop,布尔属性，用于控制音频是否循环播放 
     preload,控制音频的预载入方式 
         auto,浏览器尽可能的下载音频文件(播放流畅，但会造成网络流量的浪费) 
-        none，不缓存音频，尽可能的减少流量的浪费 
+        none,不缓存音频，尽可能的减少流量的浪费 
         metadata,只加载音频的时长信息
 
     JavaScript与音频和视频 
     1.HTMLVideoElement
-        width属性用于获取/设置视频对象的宽度
-        videoWidth属性用于获取视频对象原始宽度
+        width 属性用于获取/设置视频对象的宽度
+        videoWidth 属性用于获取视频对象原始宽度
         poster 属性用于获取/设置视频的海报帧
     2.HTMLAudioElement
         variable = new Audio([音频文件的 URL 地址]) 
     3.HTMLMediaElement
-        autoplay属性用于获取/设置媒体对象是否自动播放
-        muted属性用于获取/设置媒体对象在播放时是否静音
-        controls属性用于获取/设置媒体对象在播放时是否显示播放控件
+        autoplay 属性用于获取/设置媒体对象是否自动播放
+        muted 属性用于获取/设置媒体对象在播放时是否静音
+        controls 属性用于获取/设置媒体对象在播放时是否显示播放控件
         loop 属性用于获取/设置媒体对象是否循环播放
-        src属性用于获取/设置媒体文件的 URL 地址
+        src 属性用于获取/设置媒体文件的 URL 地址
         volume 属性用于获取/设置媒体的音量(取值范围来[0,1])
-        playbackRate属性用于获取/设置媒体的播放速率，如果其值为 1.0，为正常 速率，如果小于 1.0则低于正常速率，否则高于正常速率
+        playbackRate 属性用于获取/设置媒体的播放速率，如果其值为 1.0，为正常 速率，如果小于 1.0则低于正常速率，否则高于正常速率
         paused 属性用于获取媒体对象是否在暂停
-        ended属性用于获取媒体对象是否播放完毕
+        ended 属性用于获取媒体对象是否播放完毕
         currentTime 属性用于获取/设置媒体对象的当前播放时间(单位为秒)
-        duration属性用于获取媒体对象的总时长(单位为秒)
+        duration 属性用于获取媒体对象的总时长(单位为秒)
 
     方法:
-        play()方法用于实现媒体的播放
-        pause()方法用于实现媒体的暂停
+        play() 方法用于实现媒体的播放
+        pause() 方法用于实现媒体的暂停
     事件:
         play 事件在媒体对象播放时触发
                 HTMLMediaElement.addEventListener('play',()=>{ ... })
