@@ -10,6 +10,7 @@ import MMM from '../views/MMM.vue'
 import NNN from '../views/NNN.vue'
 import P from '../views/P.vue'
 import M from '../views/M.vue'
+import 酒店推荐 from '../views/酒店推荐.vue'
 
 Vue.use(VueRouter)
 
@@ -46,8 +47,8 @@ const routes = [
   },
   {
     path: '/666',
-    name: '出发地_目的地',
-    component: 出发地_目的地
+    name: '酒店推荐',
+    component: 酒店推荐
   },
   {
     path: '/888/:id',

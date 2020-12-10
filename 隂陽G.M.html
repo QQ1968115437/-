@@ -5,6 +5,7 @@
     <1><!-- Vue客户端 -->   <2><!-- Node服务器端 -->    <3><!-- css类 -->
     <4><!-- 网址类 -->      <5><!-- mysql类 -->         <6><!-- Mint-ui类 -->
     <100><!-- Git类 -->     <101><!-- 数据储存 WebStorage-->        <102><!-- 音频与视频-->
+    <103><!-- JS绘制图形-canvas -->
 </0>
 
 <1><!-- Vue客户端 -->
@@ -308,7 +309,7 @@ git仓库=[本地操作空间，暂存区(内存)，本地仓库]-->网络仓库
     事件:
         play 事件在媒体对象播放时触发
                 HTMLMediaElement.addEventListener('play',()=>{ ... })
-                HTMLMediaElement.onplay = ()=>{ .... }
+            或  HTMLMediaElement.onplay = ()=>{ .... }
         pause 事件在媒体对象暂停时触发
                 HTMLMediaElement.addEventListener('pause',()=>{ ... })
                 HTMLMediaElement.onpause = ()=>{ .... }
@@ -321,4 +322,32 @@ git仓库=[本地操作空间，暂存区(内存)，本地仓库]-->网络仓库
         timeupdate 事件在媒体对象的 currentTime 属性发生变化时调用
                 HTMLMediaElement.addEventListener('timeupdate',()=>{ ... })
                 HTMLMediaElement.ontimeupdate = ()=>{ .... }
+
+        全屏:
+            export default {
+                mounted () {
+                    var a=document.getElementsByClassName("a1")[0];
+                        a.width=200;a.height=200;
+                },
+                methods: {
+                    quan(){
+                        var a=document.getElementsByClassName("a1")[0];
+                        if(a.requestFullscreen){a.requestFullscreen()}else
+                        if(a.mozRequestFullScreen){a.mozRequestFullScreen()}else
+                        if(a.webkitRequestFullscreen){a.webkitRequestFullscreen()}
+                    }
+                }
+            }
 </102>
+
+<103><!-- JS绘制图形-canvas -->
+    HTMLCanvasElement
+        <canvas width="宽度" height="高度"></canvas>
+        getContext() 方法用于获取<canvas>元素的上下文,没有定义上下文则返回null
+    CanvasRenderingContext2D对象
+        strokeRect() 方法用于绘制描边矩形   ctx.strokeRect(x,y,width,height)
+        fillRect() 方法用于绘制填充矩形     ctx.fillRect(x,y,width,height)
+        strokeStyle 属性用于获取/设置描边颜色   ctx.strokeStyle = color
+        fillStyle 属性用于获取/设置填充颜色     ctx.fillStyle = color
+
+</103>
