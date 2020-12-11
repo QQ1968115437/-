@@ -9,11 +9,16 @@
         <div class="text-center m-3">
             <canvas id="mmm"></canvas>
         </div>
+        <ditu/>
     </div>
 </template>
 
 <script>
+import ditu from '../components/地图'
 export default {
+    components: {
+        ditu
+    },
     methods: {
         MM(){
             this.$store.dispatch("getServerData");
@@ -64,20 +69,22 @@ export default {
                 },60);
             }
         },600);
-
+            navigator.geolocation.getCurrentPosition(function(position){console.log(position)})
+            console.log(navigator.userAgent);
+            console.log(navigator.geolocation);
         function dan(x){
             let y=mmm.height/20;
-            // M.fillText("UI而过",x,y*2)
-            // M.fillText("UI而过",x-10,y*4)
-            // M.fillText("UI而过",x-20,y*6)
-            // M.clearRect(0,0,30+x,31) 
+            M.fillText("UI而过",x,y*2)
+            M.fillText("UI而过",x-10,y*4)
+            M.fillText("UI而过",x-20,y*6)
+            M.clearRect(0,0,30+x,31) 
         }
         var x=mmm.width-10;
         setInterval(()=>{
-            // dan(x);
-            // x++;
-            // console.log(x)
-        },100);
+            dan(x);
+            x++;
+            console.log(x)
+        },1000000);
     }
 }
 </script>

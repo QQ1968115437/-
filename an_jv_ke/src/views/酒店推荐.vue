@@ -76,23 +76,19 @@ export default {
         }
     },
     methods: {
-        r1(aa){
-            let a,b,c,d,e,f,g
-            this.lan1=a;this.lan2=b;this.lan3=c;this.lan4=d;this.lan5=e;this.lan6=f;this.lan7=g;
-        },
+        r1(a,b,c,d,e,f,g){this.lan1=a;this.lan2=b;this.lan3=c;this.lan4=d;this.lan5=e;this.lan6=f;this.lan7=g;},
         r2(){this.lan1="";this.lan2="";this.lan3="";this.lan4="";this.lan5="";this.lan6="";this.lan7="bg-lan"},
         
-        dian(e){        // 这个dian(e) js方法以后得重新修改
-            // function q1(){}
+        dian(e){
             if(e.target.nodeName=="LI"){
                 switch (e.target.innerHTML) {
-                    case "上海":this.AAA=this.A.上海;    this.lan1="bg-lan";this.lan2="";this.lan3="";this.lan4="";this.lan5="";this.lan6="";this.lan7="";break;
-                    case "北京":this.AAA=this.A.北京;    this.lan1="";this.lan2="bg-lan";this.lan3="";this.lan4="";this.lan5="";this.lan6="";this.lan7="";break;
-                    case "广州":this.AAA=this.A.广州;    this.lan1="";this.lan2="";this.lan3="bg-lan";this.lan4="";this.lan5="";this.lan6="";this.lan7="";break;
-                    case "三亚":this.AAA=this.A.三亚;    this.lan1="";this.lan2="";this.lan3="";this.lan4="bg-lan";this.lan5="";this.lan6="";this.lan7="";break;
-                    case "杭州":this.AAA=this.A.杭州;    this.lan1="";this.lan2="";this.lan3="";this.lan4="";this.lan5="bg-lan";this.lan6="";this.lan7="";break;
-                    case "成都":this.AAA=this.A.成都;    this.lan1="";this.lan2="";this.lan3="";this.lan4="";this.lan5="";this.lan6="bg-lan";this.lan7="";break;
-                    case "南京":this.AAA=this.A.南京;    this.r1();break;
+                    case "上海":this.AAA=this.A.上海;this.r1("bg-lan","","","","","","");break;
+                    case "北京":this.AAA=this.A.北京;this.r1("","bg-lan","","","","","");break;
+                    case "广州":this.AAA=this.A.广州;this.r1("","","bg-lan","","","","");break;
+                    case "三亚":this.AAA=this.A.三亚;this.r1("","","","bg-lan","","","");break;
+                    case "杭州":this.AAA=this.A.杭州;this.r1("","","","","bg-lan","","");break;
+                    case "成都":this.AAA=this.A.成都;this.r1("","","","","","bg-lan","");break;
+                    case "南京":this.AAA=this.A.南京;    this.r2();break;
                     default:break;
                 };
             if(e.target.nodeName=="LI"){
