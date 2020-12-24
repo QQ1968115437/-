@@ -1,14 +1,22 @@
-<!-- 隂陽G.M专用web手册 -->
+<!-- 隂陽G.M专用web速查手册 -->
 <!-- 2020/12/4 -->
-
+administrator
 <0><!-- 目录: -->
-    <1><!-- Vue客户端 -->   <2><!-- Node服务器端 -->    <3><!-- css类 -->
-    <4><!-- 网址类 -->      <5><!-- mysql类 -->         <6><!-- Mint-ui类 -->
-    <100><!-- Git类 -->     <101><!-- 数据储存 WebStorage-->        <102><!-- 音频与视频-->
-    <103><!-- JS绘制图形-canvas -->
+    <1><!-- Vue客户端 -->           <2><!-- Node服务器端 -->         <3><!-- css类 -->
+    <4><!-- 网址类 -->              <5><!-- mysql类 -->              <6><!-- Mint-ui类 -->
+    <7><!-- Json-server -->         <8><!-- webpack -->              <9><!-- Web Worker创建js多线程 -->
+    <10><!-- SVG -->                <11><!-- ECharts图表库 -->
+    <100><!-- Git类 -->           <101><!-- 数据储存 WebStorage-->        <102><!-- 音频与视频-->
+    <103><!-- JS绘制图形-canvas --> <105><!-- 拖放事件 -->
 </0>
 
 <1><!-- Vue客户端 -->
+    npm run build   进行打包
+    npm run serve   进行热编译
+    json-server --watch --port 8000 json_server.json
+
+npm install uuid --save  <!-- 资源唯一标识符 -->
+npm install -g json-server <!-- 安装全局的json-server -->
 npm i -g @vue/cli  <!-- 脚手架工具 -->
 npm install axios --save  <!-- 基于promise的HTTP库 -->
 npm install vue-router --save  <!-- vue路由器动态路由 -->
@@ -28,7 +36,7 @@ npm install vuex --save  <!-- 状态管理 -->
             Vue.prototype.qs=qs;
             Vue.prototype.moment=moment;
             Vue.use(MintUI)
-            axios.defaults.baseURL="http://localhost:3000"
+            axios.defaults.baseURL="http://localhost:8000"
 
             new Vue({
                 router,store,
@@ -69,7 +77,7 @@ npm install mysql  <!-- mysql数据库模块 -->
             const cors=require("cors");
             const mysql=require("mysql");
             const app=express();
-            app.listen(3000);
+            app.listen(8000);
 
         const pool=mysql.createPool({
             host:"127.0.0.1",
@@ -106,6 +114,9 @@ https://www.bootcss.com/  <!-- Bootstrap4下载 -->
 </3>
 
 <4><!-- 网址类 -->
+https://c.runoob.com/   <!-- 菜鸟工具 -->
+https://www.iconfinder.com/  <!-- svg图 -->
+https://map.baidu.com/  <!-- 百度地图 -->
 https://www.iconfont.cn/  <!-- 阿里巴巴矢量图标库 -->
 https://fontawesome.dashgame.com/  <!-- Font Awesome矢量图标库 -->
 https://www.bootcss.com/  <!-- Bootstrap框架 -->
@@ -113,6 +124,7 @@ https://animate.style/  <!-- Animate.css -->
 https://tool.oschina.net/  <!-- 在线工具 -->
 https://www.php.cn/xiazai/tool/17  <!-- php中文网工具箱 -->
 https://developer.mozilla.org/zh-CN/ <!-- MDN web docs -->
+https://www.webpackjs.com/ <!-- webpack -->
 
 </4>
 
@@ -158,6 +170,223 @@ SELECT r.id,subject,content,created_at,nickname,avatar,article_number FROM xzqa_
 <6><!-- Mint-ui类 -->
     $messagebox("注册提示","对不起,用户已存在")  <!-- 模态框 -->
 </6>
+
+<7><!-- Json-server -->
+    npm install -g json-server    <!-- 安装全局的json-server -->
+
+    json-server --watch --port 8000 json_server.json
+
+    http://localhost:8000/users    <!-- //获取所有用户信息 -->
+
+    http://localhost:8000/users/1    <!-- //获取id为1的用户信息 -->
+
+    http://localhost:8000/companies    <!-- //获取公司的所有信息 -->
+
+    http://localhost:8000/companies/1    <!-- //获取单个公司的信息 -->
+
+    http://localhost:8000/companies/3/users    <!-- //获取所有公司id为3的用户 -->
+
+    http://localhost:8000/companies?name=Google    <!-- //根据公司名字获取信息 -->
+
+    http://localhost:8000/companies?name=Google&name=Apple    <!-- //根据多个名字获取公司信息 -->
+
+    http://localhost:8000/companies?_page=1&_limit=2    <!-- //获取一页中只有两条数据 -->
+
+    http://localhost:8000/companies?_sort=name&_order=asc    <!-- //升序排序  desc降序  asc升序 -->
+
+    http://localhost:8000/users?age_gte=30    <!-- //获取年龄为30以及30以上的 -->
+
+    http://localhost:8000/users?age_gte=30&age_gte=40    <!-- //获取年龄为30到40之间的 -->
+
+    http://localhost:8000/users?q=d    <!-- //搜索用户信息 -->
+
+    知识点总结如下： 
+    1、http://localhost:3000/db 访问的是db.json文件下的所有内容； 
+    2、http://localhost:3000/layoutList?categoryName= 模拟接口参数可筛选该目录下内容 
+    3、分页查询 参数为 _start, _end, _limit，并可添加其它参数筛选条件 
+        如：http://localhost:3000/posts?_start=6&_limit=3 
+        http://localhost:3000/posts?_start=3&_end=6 
+    4、排序 参数为_sort, _order 
+        如：http://localhost:3000/posts?_sort=id&_order=asc 
+        http://localhost:3000/posts?_sort=user,views&_order=desc,asc 
+    5、操作符 _gte, _lte, _ne, _like 
+        _gte大于，_lte小于， _ne非， _like模糊查询 
+    6、q全局搜索（模糊查询）
+</7>
+
+<8><!-- webpack -->
+运行在Nodejs中
+    核心概念：
+    (0)mode：运行模式，可以指定为production或者development
+    (1)entry：入口，指定资源包的入口文件
+    (2)output：输出，指定最终输出的资源包文件
+    (3)loader：加载器，让Webpack可以处理非JS文件，如CSS/图片等
+    (4)plugin：插件，可以进一步扩展Webpack本身的功能
+
+使用过程：
+    (1)创建客户端项目，编写HTML/CSS/JS/图片等文件
+    (2)创建项目的描述文件：package.json
+      npm  init
+    (3)下载webpack及其依赖的模块，并添加为当前项目的“开发阶段依赖模块”
+      npm  i   webpack   --save-dev
+      npm  i   webpack-cli   --save-dev
+    (4)创建webpack主配置文件： webpack.config.js
+      module.exports = {
+          mode: 'production',
+          entry: './public/src/js/index.js',
+          output: {
+              path: __dirname + '/dist',
+              filename: 'bundle.js'
+            },
+            module: { },
+            plugins: [ ]
+        }
+    (5)运行webpack，根据主配置文件对静态资源进行打包
+        node  ./node_modules/webpack/bin/webpack.js
+        或者配置为scripts： "build": "webpack"，用 npm  run  build方式运行
+
+        module.exports= function getCompanyName(){
+            return 'TEDU.CN';
+        }
+        import getCompanyName from "./util"
+</8>
+
+<9><!-- Web Worker创建js多线程 -->
+    new Worker("./wc.js");
+    postMessage(shu);
+    onmessage
+</9>
+
+<10><!-- SVG -->
+    https://c.runoob.com/more/svgeditor/    <!-- svg编辑器 -->
+
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="宽度" height="高度">...</svg>
+    1.svg元素 
+        stroke-width 属性用于设置描边的宽度 
+        stroke 属性用于设置描边的颜色
+        fill 填充颜色
+        text 绘制文本                 <text x="" y=""></text>
+        line 元素用于绘制线段         <line x1="起点 X 轴" y1="起点Y 轴" x2="终点 X轴" y2="终点Y 轴"></line>
+        polyline 元素用于绘制折线     <polyline points="x1,y1,x2,y2,..."></polyline>
+        circle 画圆                   <circle cx="圆心x" cy="圆心y" r="半径"></circle>
+        ellipse 绘制椭圆              <ellipse cx="圆心x" cy="圆心y" rx="水平半径" ry="垂直半径"></ellipse>
+        rect 元素用于绘制(圆角)矩形   <rect x="起点的 X 轴" y="起点的 Y 轴" width="宽度" height="高度" rx="长轴半径" ry="短轴半径"></rect>
+        a 元素用于实现链接            <a xlink:href="目标文档 URL" xmlns:xlink="http://www.w3.org/1999/xlink">...</a> 
+    2.SVG DOM API 
+        document.createElementNS() 方法用于创建指定命名空间内的元素
+            Element document.createElementNS('命名空间','元素名称') 
+            let a=document.createElementNS('http://www.w3.org/2000/svg','circle') 
+        设置与获取元素属性  Element.setAttribute(name,value)    Element.getAttribute(name) 
+        添加/删除子元素     Node Node.appendChild(subNode)      Node.removeChild(subNode)
+
+</10>
+
+<11><!-- ECharts图表库 -->
+    https://echarts.apache.org/zh/index.html
+    https://echarts.apache.org/zh/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts
+
+    npm install --save echarts 
+    A.在 HTML 页面中创建 DIV 元素，该 DIV 将作为图表渲染容器出现，必须为该 DIV元素设置明确的宽度和高度 
+    B.书写 script 标签，并且调用 echarts 对象的 init()方法以完成图表实例的 创建，init()方法的语法结构建如下：
+    C.通过图表实例的 setOption()方法实现实例的配置
+    instance.setOption({...}) 
+
+    var a = echarts.init(document.getElementById('a001'), 'vintage');
+    var b={
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+            data:['销量']
+        },
+        xAxis: {
+            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    }
+    a.setOption(b);
+
+    1. 配置项
+    title组件用于控制标题信息
+        title:{ show:是否显示标题信息(true|false), 
+            text:'控制主标题文本信息', 
+            link:'控制主标题的链接 URL 地址', 
+            target:'控制打开主标题链接的窗口形式(blank|self)', 
+            // 控 制 主 标 题 文 本 的 样 式 
+            textStyle:{ color:'主标题文本颜色', 
+            fontSize:主标题文本字号(整数), 
+            fontFamily:'主标题文本字体', 
+            fontWeight:'主标题文本的加粗(normal|bold)', 
+            fontStyle:'主标题文本的倾斜(normal|italic)' }, 
+            subtext:'副标题的文本信息', 
+            sublink:'控制副标题的链接 URL 地址', 
+            subtarget:'控制打开副标题链接的窗口形式(blank|self)', 
+            top:'title 组件离容器上侧的距离'(数字或字符串 top|middle|bottom),
+            right: 
+            bottom: 
+            left:'title 组件离容器左侧的距离'(数字或字符串 left|center|right)
+        }
+    xAxis属性用于控制 X 轴信息    yAxis属性用于控制 Y 轴信息
+        xAxis:{ 
+            show:是否显示 X 轴(true|false), 
+            type:'X 轴的类型(category|time)', 
+            data:该属性在 type 属性为 category 时必须存在,数组类型 
+        } 
+    series 属性用于控制图表系列
+        series:[ 
+            { 
+                type:'系列的名称(line|bar|pie)', 
+                data:系列的数据(数组·) 
+            }, 
+            { 
+                type:'系列的名称(line|bar|pie)', 
+                data:系列的数据(数组·) 
+            } 
+        ]
+</11>
+
+<12><!-- 微信小程序 -->
+    getApp()    获取app对象
+    getApp().globalData.xxx     获取全局数据     
+
+    "pages"属性用于指定小程序中的页面组成，而且数组中的 第一项将作为首页显示。 
+
+    • .json，静态配置文件 
+        – app.json,整个项目的全局配置文件 
+        – page.json,每个页面专有的配置文件，如 index.json 
+    • .js/.ts,脚本文件 
+        – app.js,整个项目的入口脚本文件 
+        – page.js，每个页面专有的脚本文件 
+    • .wxml,页面的模板文件(不能使用任何的 HTML 标签，只能使用小程序专有的标签 ) 
+    • wxss,页面的样式文件 
+        – app.wxss，整个项目的样式文件 
+        – page.wxss，每个页面专用的样式文件
+    app.json、app.wxss、app.js 必须位于小程序的根目录下。
+
+    <button size="mini" type="warn" bindtap="shan" data-index="{{index}}">删除</button>    data-收集数据传回到逻辑层
+
+    <block> 包装元素，不会在页面中做任何渲染，只接受控制属性 wx:if/wx:for
+
+        <!-- 消息提示框中函数中this指向问题：箭头函数解 -->
+        wx.showModal({
+            title: '提示',
+            content: '！！！是否删除 ！！！',
+            success: (res)=>{
+              if (res.confirm) {
+                console.log('用户点击确定')
+                wen.splice(index,1);
+                this.setData({wen:wen});
+              }
+            }
+          })
+          <!-- ************** -->
+</12>
 
 <100><!-- Git类 -->
 ---------------------------------------------------------------------
@@ -341,13 +570,79 @@ git仓库=[本地操作空间，暂存区(内存)，本地仓库]-->网络仓库
 </102>
 
 <103><!-- JS绘制图形-canvas -->
-    HTMLCanvasElement
+    1.HTMLCanvasElement
         <canvas width="宽度" height="高度"></canvas>
         getContext() 方法用于获取<canvas>元素的上下文,没有定义上下文则返回null
-    CanvasRenderingContext2D对象
-        strokeRect() 方法用于绘制描边矩形   ctx.strokeRect(x,y,width,height)
-        fillRect() 方法用于绘制填充矩形     ctx.fillRect(x,y,width,height)
-        strokeStyle 属性用于获取/设置描边颜色   ctx.strokeStyle = color
-        fillStyle 属性用于获取/设置填充颜色     ctx.fillStyle = color
+            let mmm=document.getElementById("mmm");
+            let D=mmm.getContext("2d");
+            mmm.width=400;mmm.height=200;
+    2.CanvasRenderingContext2D对象
+        颜色在矩形或文本位置前一行写
+        strokeStyle 属性用于获取/设置描边颜色       D.strokeStyle = color
+        fillStyle 属性用于获取/设置填充颜色         D.fillStyle = color
+        font 属性用于获取/设置文本样式              D.font = "字号 字体"
+        textAlign 属性用于设置文本的水平对齐方式    D.textAlign = 'left|center|right' 
 
+        strokeRect() 方法用于绘制描边矩形           D.strokeRect(x,y,width,height)
+        fillRect() 方法用于绘制填充矩形             D.fillRect(x,y,width,height)
+        strokeText() 方法用于绘制描边文本           D.strokeText(text,x,y)
+        fillText() 方法用于绘制填充文本             D.fillText(text,x,y) 
+        clearRect() 方法用于擦除指定的矩形区域      D.clearRect(x,y,width,height) 
+        beginPath() 方法用于新始一个新的路径        D.beginPath() 
+        moveTo() 方法用于指定路径的起点             D.moveTo(x,y)
+        lineTo() 方法用于绘制线段                   D.lineTo(x,y)
+        arc() 方法用于绘制圆弧路径                  D.arc(x,y,radius,start_angle,end_angle)
+        stroke() 方法用于根据当前的描边样式来绘制路径   D.stroke()
+
+        路径(path)将预先设置的坐标点顺序连接形成的图形
+            路径的绘制步骤： 
+            A.通过 ctx.beginPath()方法开始新的路径 
+            B.通过 ctx.moveTo()方法指定路径的起点坐标 
+            C.绘制基本路径内容(如 lineTo(),rect(),arc()方法用于绘制线段等) 
+            D.通过 stroke()或 fill()方法完成路径的绘制 
+    3.window对象 
+        requestAnimationFrame() 方法用于在浏览器中定时循环执行一个操作
+                variable = window.requestAnimationFrame(callback) 
+        cancelAnimationFrame() 方法用于清理由requestAnimationFrame()方法返回的requestId
+                window.cancelAnimationFrame(requestId) 
 </103>
+
+<104><!-- 地理位置 -->
+    https://map.baidu.com/
+    Geolocation API 位于 navigator 对象
+    方法:
+        getCurrentPosition()
+        watchPosition()
+        clearWatch()
+    navigator.geolocation.getCurrentPosition(a,b,{geolocation选项})
+        参数:   a:用户允许共享geolocation的回调;    b:位置获取失败的回调
+    navigator.geolocation.getCurrentPosition(function(position){console.log(position.coords)})
+</104>
+
+<105><!-- 拖放事件 -->
+    dragstart 事件在源对象开始被拖放时触发  HTMLElement.ondragstart = ()=>{  } 
+    drag 事件在源对象拖放过程中被触发  HTMLElement.ondrag = ()=>{  } 
+    dragend事件在源对象释放后被触发  HTMLElement.ondragend = ()=>{  } 
+    dragenter事件是在源对象进入目标对象的区域范围时被触发  HTMLElement.ondragenter = ()=>{  } 
+    dragover事件在源对象在目标对象悬停时触发  HTMLElement.ondragover = ()=>{ event.preventDefault(); } 必须在该事件内调用 event.preventDefault()方法，否则不会触发 drop 事件
+    dragleave 事件在源对象拖动离开目标对象时触发  HTMLElement.ondragleave = ()=>{  } 
+    drop 事件将在源对象在目标对象范围内释放时触发  HTMLElement.ondrop = ()=>{  } 
+
+    拖放事件的触发顺序： dragstart-->drag-->dragenter-->dragover-->drop-->dragend 
+
+    dataTransfer 属性将返回 DataTransfer对象，用于保存拖放数据
+
+    DataTransfer对象
+    setData()方法用于给指定的类型设置数据，如果类型不存在则自动添加到到 未尾，如果存在的话，则替换原来的值
+        DataTransfer.setData(type,value) 
+    getData()方法用于获取指定类型的数据
+        variable = DataTransfer.getData(type)
+</105>
+
+
+<!--
+// 最终修改，正常加载
+<div>
+    <img :src="require(`../assets/${ss[1]}.svg`)" alt="" />
+</div> 
+-->
